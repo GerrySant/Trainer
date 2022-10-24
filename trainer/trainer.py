@@ -695,7 +695,7 @@ class Trainer:
             logger.info(" > Restoring Model...")
             model.load_state_dict(checkpoint["model"])
             logger.info(" > Restoring Optimizer...")
-            optimizer = _restore_list_objs(checkpoint["optimizer"], optimizer)
+            optimizer = self.get_optimizer(self.model, self.config) # Get optimizer from the new config.json
             if "scaler" in checkpoint and self.use_amp_scaler and checkpoint["scaler"]:
                 logger.info(" > Restoring Scaler...")
                 scaler = _restore_list_objs(checkpoint["scaler"], scaler)
